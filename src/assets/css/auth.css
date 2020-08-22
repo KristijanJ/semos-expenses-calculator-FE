@@ -1,0 +1,59 @@
+.auth-container {
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.form {
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 30px 40px;
+}
+
+.form-field label {
+  font-size: 18px;
+  color: #8D8D8D;
+  padding: 15px 0 10px 0;
+  display: block;
+}
+
+.form-field input {
+  background: #ffffff;
+  border: 2px solid #c6c6c6;
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+}
+
+.form-field select {
+  background: #ffffff;
+  border: 2px solid #c6c6c6;
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+}
+
+.form-field input[type=button] {
+  font-size: 15px;
+  color: #fff;
+  background: #1DD1A1;
+  height: 50px;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.17);
+  outline: none;
+  border: none;
+  width: 100%;
+  text-transform: uppercase;
+  margin-top: 40px;
+}
+
+.form-field p {
+  text-align: center;
+  color: #8D8D8D;
+  padding-top: 25px;
+}
+
+.form-field a {
+  color: #8D8D8D;
+}
