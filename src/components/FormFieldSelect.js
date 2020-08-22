@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { CountryDropdown } from 'react-country-region-selector';
 
-export default function FormFieldInput(props) {
-  return (
-    <div className="form-field">
-      <label for={props.id}>{props.title}</label>
-      <select name={props.id} id={props.id}>
-        <option>Macedonia</option>
-      </select>
-    </div>
-  )
+export default class FormFieldSelect extends Component {
+  render() {
+    return (
+      <div className="form-field">
+        <label for={this.props.id}>{this.props.title}</label>
+        <CountryDropdown />
+      </div>
+    )
+  }
 }
+// <CountryDropdown onChange={(val) => this.selectCountry(val)} />
