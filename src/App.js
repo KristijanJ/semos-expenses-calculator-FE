@@ -4,7 +4,9 @@ import { connect } from "react-redux";
 
 import Login from './views/Login';
 import Register from './views/Register';
-import Dashboard from './views/Dashboard';
+import Products from './components/Products';
+import Expenses from './components/Expenses';
+import Product from './components/Product';
 
 import './App.css';
 
@@ -28,8 +30,10 @@ class App extends Component {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <PrivateRoute path="/dashboard" component={Dashboard} />
-          <Redirect to="/dashboard" />
+          <PrivateRoute path="/dashboard/products/:id" component={Product} />
+          <PrivateRoute path="/dashboard/products" component={Products} />
+          <PrivateRoute path="/dashboard/expenses" component={Expenses} />
+          <Redirect to="/dashboard/products" />
         </Switch>
       </Router>
     )

@@ -2,12 +2,24 @@ import React, { Component } from 'react';
 import '../assets/css/dashboard.css';
 
 export default class Header extends Component {
+  componentDidMount() {
+    console.log(this.props.location.pathname)
+  }
+
   render() {
     return (
       <header className="header">
         <div className="btn-group">
-          <button className="btn btn-solid text-bold">Products</button>
-          <button className="btn btn-ghost text-bold">Expenses</button>
+          <button
+            className={this.props.location.pathname === '/dashboard/products' ? "btn btn-solid text-bold" : "btn btn-ghost text-bold"}
+            onClick={() => this.props.history.push('/dashboard/products')}>
+              Products
+            </button>
+          <button
+            className={this.props.location.pathname === '/dashboard/expenses' ? "btn btn-solid text-bold" : "btn btn-ghost text-bold"}
+            onClick={() => this.props.history.push('/dashboard/expenses')}>
+              Expenses
+            </button>
         </div>
         <div className="user">
           <div className="user-photo">

@@ -12,7 +12,7 @@ export default class Table extends Component {
             <th>Product Description</th>
             <th>Purchase Date</th>
             <th>Product Price</th>
-            <th>Actions</th>
+            <th>{this.props.actions ? 'Actions' : ''}</th>
           </tr>
         </thead>
         <tbody>
@@ -23,8 +23,14 @@ export default class Table extends Component {
             <td>19.04.2019</td>
             <td>75</td>
             <td>
-              <i className="far fa-edit"></i>
-              <i className="far fa-trash-alt"></i>
+              {
+                this.props.actions ? 
+                <>
+                <i onClick={() => this.props.history.push('/dashboard/products/' + 1)} className="far fa-edit"></i>
+                <i onClick={() => this.props.deleteProduct(1)} className="far fa-trash-alt"></i>
+                </> : 
+                ''
+              }
             </td>
           </tr>
         </tbody>

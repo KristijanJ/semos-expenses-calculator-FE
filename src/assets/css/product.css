@@ -1,0 +1,22 @@
+.product-container {
+  display: flex;
+  width: 90%;
+  margin: auto;
+}
+
+.product-container > div {
+  flex: 1;
+}
+
+.product-container .product-action-info {
+  background: #ededed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #8d8d8d;
+}
+
+.product-container .product-action-info p {
+  padding-top: 20px;
+}

@@ -36,4 +36,5 @@ tbody::before {
 
 tbody tr td i {
   margin: 0 4px;
+  cursor: pointer;
 }

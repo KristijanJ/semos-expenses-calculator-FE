@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import Header from './Header';
 import Table from './Table';
+import Header from '../components/Header';
+import NewProductButton from '../components/NewProductButton';
 
 export default class Products extends Component {
   render() {
     return (
       <div className="main-container">
-        <Header />
+        <Header {...this.props} />
         <div className="component-container">
           <div className="component-header">
             <h1>Products</h1>
@@ -20,8 +21,13 @@ export default class Products extends Component {
               </select>
             </div>
           </div>
-          <Table />
+          <Table
+            actions="true"
+            deleteProduct={this.props.deleteProduct}
+            {...this.props}
+          />
         </div>
+        <NewProductButton />
       </div>
     )
   }
