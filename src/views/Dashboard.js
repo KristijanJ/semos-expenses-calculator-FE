@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
+import Products from '../components/Products';
+import NewProductButton from '../components/NewProductButton';
 
 
 export default class Dashboard extends Component {
@@ -14,7 +16,8 @@ export default class Dashboard extends Component {
   render() {
     return (
       <div>
-        yo
+        <Products />
+        <NewProductButton />
       </div>
     )
   }

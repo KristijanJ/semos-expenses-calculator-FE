@@ -12,7 +12,7 @@ export default class LoginForm extends Component {
           <FormFieldInput type="button" value="Sign In" />
         </div>
         <div className="form-field">
-        <p>Or if you don't have an account, <Link to="/register">Register</Link></p>
+          <p>Or if you don't have an account, <Link to="/register">Register</Link></p>
         </div>
       </div>
     )
