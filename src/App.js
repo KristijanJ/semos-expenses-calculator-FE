@@ -4,15 +4,19 @@ import { connect } from "react-redux";
 
 import Login from './views/Login';
 import Register from './views/Register';
-import Products from './components/Products';
-import Expenses from './components/Expenses';
-import Product from './components/Product';
+import Products from './views/Products';
+import Expenses from './views/Expenses';
+import Product from './views/Product';
 
 import './App.css';
 
+function isAuthenticated() {
+  return false;
+}
+
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={ props => (
-    true ? (
+    isAuthenticated() ? (
       <Component {...props}/>
     ) : (
       <Redirect to={{

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import FormFieldInput from './FormFieldInput'
+import FormFieldInput from '../components/FormFieldInput'
 import '../assets/css/product.css'
 
 export default class Product extends Component {

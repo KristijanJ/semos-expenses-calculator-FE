@@ -23,7 +23,7 @@ export default class Header extends Component {
         </div>
         <div className="user">
           <div className="user-photo">
-            <img src="https://i.pinimg.com/564x/d9/56/9b/d9569bbed4393e2ceb1af7ba64fdf86a.jpg" width="40" height="40"/>
+            <img src="https://i.pinimg.com/564x/d9/56/9b/d9569bbed4393e2ceb1af7ba64fdf86a.jpg" width="40" height="40" alt="profile"/>
           </div>
           <div className="user-name">Kristijan Jovanovski</div>
         </div>
