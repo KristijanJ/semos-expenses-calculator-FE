@@ -3,10 +3,6 @@ import FormFieldInput from './FormFieldInput'
 import '../assets/css/product.css'
 
 export default class Product extends Component {
-  componentDidMount() {
-    console.log(this.props)
-  }
-
   render() {
     return (
       <div className="main-container">
@@ -21,7 +17,7 @@ export default class Product extends Component {
           </div>
           <div className="product-action-info">
             {
-              this.props.match.params === 'new' ?
+              this.props.match.params.id === 'new' ?
               <React.Fragment>
                 <i className="fas fa-plus-circle fa-3x"></i>
                 <p>You are creating a new product</p>

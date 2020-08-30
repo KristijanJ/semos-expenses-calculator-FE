@@ -61,6 +61,8 @@ export default class Products extends Component {
             <div className="filter">
               <label htmlFor="filter">Choose year </label>
               <select id="filter" name="year" value={this.state.year} onChange={this.handleOnChange}>
+                <option>2015</option>
+                <option>2016</option>
                 <option>2017</option>
                 <option>2018</option>
                 <option>2019</option>

@@ -27,7 +27,7 @@ export default class Products extends Component {
             {...this.props}
           />
         </div>
-        <NewProductButton />
+        <NewProductButton {...this.props} />
       </div>
     )
   }
