@@ -13,7 +13,8 @@ class Products extends Component {
 
     this.state = {
       showDeleteModal: false,
-      product: null
+      product: null,
+      filter: null,
     }
   }
 
@@ -21,9 +22,14 @@ class Products extends Component {
     this.getProductsForUser();
   }
 
-  getProductsForUser = () => {
+  getProductsForUser = (filter) => {
     let userToken = this.props.userToken;
-    Axios.get('http://127.0.0.1:8091/api/v1/products', {
+    var url = 'http://127.0.0.1:8091/api/v1/products';
+    if (filter) {
+      url += '?filter=' + filter;
+    }
+    
+    Axios.get(url, {
           headers: {
             'Authorization': `Bearer ${userToken}`
           }
@@ -59,6 +65,13 @@ class Products extends Component {
       })
   }
 
+  handleOnChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+    if (event.target.name === 'filter') {
+      this.getProductsForUser(event.target.value);
+    }
+  }
+
   render() {
     return (
       <div className="main-container">
@@ -67,12 +80,12 @@ class Products extends Component {
           <div className="component-header">
             <h1>Products</h1>
             <div className="filter">
-              <label htmlFor="filter">Filter by: </label>
-              <select id="filter">
-                <option>Year</option>
-                <option>Highest Price</option>
-                <option>Lowest Price</option>
-                <option>Latest Purchases</option>
+              <label htmlFor="filter">Sort by: </label>
+              <select id="filter" name="filter" onChange={this.handleOnChange}>
+                <option value="none">None</option>
+                <option value="highest-price">Highest Price</option>
+                <option value="lowest-price">Lowest Price</option>
+                <option value="latest-purchases">Latest Purchases</option>
               </select>
             </div>
           </div>
