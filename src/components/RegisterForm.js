@@ -27,17 +27,24 @@ export default class RegisterForm extends Component {
     }})
   }
 
+  handleOnChangeCountry = (val) => {
+    this.setState({ user: {
+      ...this.state.user,
+      country: val
+    }})
+  }
+
   render() {
     return (
       <div className="auth-container">
         <div className="form">
-        <FormFieldInput id="first_name" title="First Name" type="text"  handleOnChange={this.handleOnChange} />
-        <FormFieldInput id="last_name" title="Last Name" type="text"  handleOnChange={this.handleOnChange} />
-        <FormFieldInput id="email" title="Email" type="email"  handleOnChange={this.handleOnChange} />
-        <FormFieldInput id="dateOfBirth" title="Date of Birth" type="date"  handleOnChange={this.handleOnChange} />
-        <FormFieldInput id="telephone" title="Telephone" type="text"  handleOnChange={this.handleOnChange} />
-        <FormFieldSelect id="country" title="Country" type="text"  handleOnChange={this.handleOnChange} />
-        <FormFieldInput id="password" title="Password" type="text"  handleOnChange={this.handleOnChange} />
+        <FormFieldInput id="first_name" title="First Name" type="text" handleOnChange={this.handleOnChange} />
+        <FormFieldInput id="last_name" title="Last Name" type="text" handleOnChange={this.handleOnChange} />
+        <FormFieldInput id="email" title="Email" type="email" handleOnChange={this.handleOnChange} />
+        <FormFieldInput id="dateOfBirth" title="Date of Birth" type="date" handleOnChange={this.handleOnChange} />
+        <FormFieldInput id="telephone" title="Telephone" type="text" handleOnChange={this.handleOnChange} />
+        <FormFieldSelect id="country" title="Country" type="text" value={this.state.user.country} handleOnChangeCountry={this.handleOnChangeCountry} />
+        <FormFieldInput id="password" title="Password" type="text" handleOnChange={this.handleOnChange} />
 
         <FormFieldInput value="Register" type="button" handleSubmit={() => this.props.handleSubmit(this.state.user)} />
         </div>

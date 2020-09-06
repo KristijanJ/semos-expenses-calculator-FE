@@ -6,9 +6,8 @@ export default class FormFieldSelect extends Component {
     return (
       <div className="form-field">
         <label htmlFor={this.props.id}>{this.props.title}</label>
-        <CountryDropdown />
+        <CountryDropdown name="country" value={this.props.value} onChange={(val) => this.props.handleOnChangeCountry(val)} />
       </div>
     )
   }
 }
-// <CountryDropdown onChange={(val) => this.selectCountry(val)} />
