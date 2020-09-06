@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import PrivateRoute from './components/PrivateRoute';
 import { connect } from "react-redux";
 
 import Login from './views/Login';
@@ -9,23 +10,6 @@ import Expenses from './views/Expenses';
 import Product from './views/Product';
 
 import './App.css';
-
-function isAuthenticated() {
-  return false;
-}
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={ props => (
-    isAuthenticated() ? (
-      <Component {...props}/>
-    ) : (
-      <Redirect to={{
-        pathname: '/login',
-        state: { from: props.location }
-      }}/>
-    )
-  )}/>
-)
 
 class App extends Component {
   render() {
@@ -44,15 +28,10 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  products: state.productReducer.products,
-  product: state.productReducer.product
-});
+const mapStateToProps = state => {
+  return {
+    user: state.authReducer.user
+  };
+};
 
-const mapDispatchToProps = dispatch => ({
-  // fetchAllNotes: () => {
-  //   dispatch(fetchAllNotes());
-  // }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

@@ -7,7 +7,14 @@ export default function FormFieldInput(props) {
         <label htmlFor={props.id}>{props.title}</label>
         : ''
       }
-      <input type={props.type} name={props.id} id={props.id} value={props.value} />
+      <input
+        type={props.type}
+        name={props.id}
+        id={props.id}
+        value={props.value}
+        onChange={props.handleOnChange}
+        onClick={props.handleSubmit}
+      />
     </div>
   )
 }
