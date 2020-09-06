@@ -1,8 +1,31 @@
 import React, { Component } from 'react';
 import '../assets/css/table.css';
+import { connect } from 'react-redux';
 
-export default class Table extends Component {
+class Table extends Component {
   render() {
+    const tableItems = this.props.products.map((p) => (
+      <tbody key={p._id}>
+        <tr>
+          <td>{p.name}</td>
+          <td>{p.type}</td>
+          <td>{p.description}</td>
+          <td>{p.date}</td>
+          <td>{p.price ? p.price : 0} den.</td>
+          <td>
+            {
+              this.props.actions ? 
+              <React.Fragment>
+                <i onClick={() => this.props.history.push('/dashboard/products/' + p._id)} className="far fa-edit"></i>
+                <i onClick={() => this.props.deleteProduct(p)} className="far fa-trash-alt"></i>
+              </React.Fragment> : 
+              ''
+            }
+          </td>
+        </tr>
+      </tbody>
+    ))
+
     return (
       <table>
         <thead>
@@ -15,26 +38,16 @@ export default class Table extends Component {
             <th>{this.props.actions ? 'Actions' : ''}</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Coca-cola</td>
-            <td>Drink</td>
-            <td>carbonated soft drink</td>
-            <td>19.04.2019</td>
-            <td>75</td>
-            <td>
-              {
-                this.props.actions ? 
-                <>
-                <i onClick={() => this.props.history.push('/dashboard/products/' + 1)} className="far fa-edit"></i>
-                <i onClick={() => this.props.deleteProduct(1)} className="far fa-trash-alt"></i>
-                </> : 
-                ''
-              }
-            </td>
-          </tr>
-        </tbody>
+        {tableItems}
       </table>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    products: state.productReducer.products
+  };
+};
+
+export default connect(mapStateToProps)(Table);

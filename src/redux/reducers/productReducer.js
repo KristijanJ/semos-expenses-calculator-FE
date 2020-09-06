@@ -5,13 +5,13 @@ const initState = {
 
 const productReducer = (state = initState, action) => {
   switch (action.type) {
-    case "FETCH_PRODUCTS":
+    case "GET_PRODUCTS":
       return {
         ...state,
         products: action.payload
       };
 
-    case "FETCH_PRODUCT":
+    case "GET_PRODUCT":
       return {
         ...state,
         product: action.payload

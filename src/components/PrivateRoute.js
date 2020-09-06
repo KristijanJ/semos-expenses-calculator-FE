@@ -24,9 +24,8 @@ class PrivateRoute extends Component {
           }
       }).then(res => {
         this.props.writeUser({
-          email: res.data.email,
-          first_name: res.data.first_name,
-          last_name: res.data.last_name
+          user: res.data,
+          userToken: userToken
         });
         this.setState({ loaded: true, haveAccess: true });
       }).catch(err => {

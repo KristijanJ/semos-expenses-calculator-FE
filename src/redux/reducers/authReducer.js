@@ -21,7 +21,8 @@ const userReducer = (state = initialState, action) => {
     case 'WRITE_USER':
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
+        userToken: action.payload.userToken,
         isLoaded: true
       }
   

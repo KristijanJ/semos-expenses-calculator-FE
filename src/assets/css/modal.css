@@ -1,0 +1,39 @@
+
+.delete-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.59);
+}
+
+.delete-modal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 440px;
+  height: 225px;
+  background: #fff;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 15px;
+}
+
+.delete-modal-container h1,
+.delete-modal-container p {
+  margin: 0;
+  padding: 0;
+}
+
+.delete-modal-container .btn-group {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.delete-modal-container .btn {
+  margin: 0 8px;
+}
