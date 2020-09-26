@@ -10,7 +10,7 @@ class Table extends Component {
           <td>{p.name}</td>
           <td>{p.type}</td>
           <td>{p.description}</td>
-          <td>{p.date}</td>
+          <td>{p.date.full_date}</td>
           <td>{p.price ? p.price : 0} den.</td>
           <td>
             {

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Table from '../components/Table';
 import Header from '../components/Header';
-
-export default class Products extends Component {
+import { connect } from 'react-redux';
+import { getProducts } from '../redux/actions/productActions';
+import Axios from 'axios';
+class Expenses extends Component {
   constructor(props) {
     super(props);
 
@@ -15,21 +17,53 @@ export default class Products extends Component {
   }
 
   getCurrentMonth = () => {
-    let m = new Date().getMonth();
-    this.setState({ month: this.state.months[m] })
+    return new Date().getMonth() + 1;
   }
 
   componentDidMount() {
-    this.getCurrentMonth();
+    this.setState({ month: this.getCurrentMonth() });
+    this.getProductsForUser(this.getCurrentMonth(), this.state.year, this.state.filter);
   }
 
   handleOnChange = (event) => {
-    this.setState({ [event.target.name]: parseInt(event.target.value) })
+    this.setState({ [event.target.name]: event.target.value });
+    if (event.target.name === 'month') {
+      this.getProductsForUser(event.target.value, this.state.year, this.state.filter);
+    } else if (event.target.name === 'year') {
+      this.getProductsForUser(this.state.month, event.target.value, this.state.filter);
+    }
+    
   }
 
   changeMonth = (event) => {
-    this.setState({ filter: event.target.innerText.toLowerCase() });
-    
+    let filter = event.target.innerText.toLowerCase();
+    this.setState({ filter: filter });
+    if (filter === 'yearly') {
+      this.getProductsForUser(0, this.state.year, filter);
+    } else {
+      this.getProductsForUser(this.state.month, this.state.year, filter);
+    }
+  }
+
+  getProductsForUser = (month, year, filter) => {
+    console.log(month, year);
+    let userToken = this.props.userToken;
+    var url = 'http://127.0.0.1:8091/api/v1/expenses?year=' + year;
+    if (filter === 'monthly') {
+      url += '&month=' + month;
+    }
+    console.log(url);
+
+    Axios.get(url, {
+          headers: {
+            'Authorization': `Bearer ${userToken}`
+          }
+      }).then(res => {
+        console.log(res.data);
+        this.props.getProducts(res.data);
+      }).catch(err => {
+        console.log(err);
+      })
   }
 
   render() {
@@ -44,29 +78,29 @@ export default class Products extends Component {
             <div className="filter" style={(this.state.filter === 'yearly' ? {display: 'none'} : {})}>
               <label htmlFor="filter">Choose month </label>
               <select id="filter" name="month" value={this.state.month} onChange={this.handleOnChange}>
-                <option>January</option>
-                <option>February</option>
-                <option>March</option>
-                <option>April</option>
-                <option>May</option>
-                <option>June</option>
-                <option>July</option>
-                <option>August</option>
-                <option>September</option>
-                <option>October</option>
-                <option>November</option>
-                <option>December</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
               </select>
             </div>
             <div className="filter">
               <label htmlFor="filter">Choose year </label>
               <select id="filter" name="year" value={this.state.year} onChange={this.handleOnChange}>
-                <option>2015</option>
-                <option>2016</option>
-                <option>2017</option>
-                <option>2018</option>
-                <option>2019</option>
-                <option>2020</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
               </select>
             </div>
           </div>
@@ -76,3 +110,17 @@ export default class Products extends Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    userToken: state.authReducer.userToken,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  getProducts: (products) => {
+    dispatch(getProducts(products));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Expenses);
