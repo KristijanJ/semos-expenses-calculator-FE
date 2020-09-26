@@ -28,11 +28,17 @@ class Product extends Component {
             }
         }).then(res => {
           let p = res.data[0];
+          console.log(p);
           this.setState({ product: {
             name: p.name ? p.name : '',
             description: p.description ? p.description : '',
             type: p.type ? p.type : '',
-            date: p.date ? p.date : '',
+            date: {
+              full_date: p.date.full_date ? p.date.full_date : '',
+              day: p.date.day ? p.date.day : '',
+              month: p.date.month ? p.date.month : '',
+              year: p.date.year ? p.date.year : '',
+            },
             price: p.price ? p.price : '',
             owner_id: this.props.user._id
           } })
@@ -77,10 +83,23 @@ class Product extends Component {
   }
 
   handleOnChange = (event) => {
-    this.setState({ product: {
-      ...this.state.product,
-      [event.target.name]: event.target.value
-    }})
+    if (event.target.name === 'date') {
+      this.setState({ product: {
+          ...this.state.product,
+          date: {
+            full_date: event.target.value,
+            day: event.target.value.split('-')[2],
+            month: event.target.value.split('-')[1],
+            year: event.target.value.split('-')[0],
+          }
+        }
+      })
+    } else {
+      this.setState({ product: {
+        ...this.state.product,
+        [event.target.name]: event.target.value
+      }})
+    }
   }
 
   render() {
@@ -95,7 +114,7 @@ class Product extends Component {
             <FormFieldInput id="name" title="Product Name" type="text" value={p.name} handleOnChange={this.handleOnChange} />
             <FormFieldInput id="description" title="Product Description" type="text" value={p.description} handleOnChange={this.handleOnChange} />
             <FormFieldInput id="type" title="Product Type" type="text" value={p.type} handleOnChange={this.handleOnChange} />
-            <FormFieldInput id="date" title="Product Date" type="date" value={p.date} handleOnChange={this.handleOnChange} />
+            <FormFieldInput id="date" title="Product Date" type="date" value={p.date.full_date} handleOnChange={this.handleOnChange} />
             <FormFieldInput id="price" title="Product Price" type="number" value={p.price} handleOnChange={this.handleOnChange} />
             <FormFieldInput type="button" value={ this.props.match.params.id === 'new' ? 'Create product' : 'Save product' } handleSubmit={this.saveProduct} />
           </div>

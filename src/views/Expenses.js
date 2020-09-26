@@ -66,6 +66,14 @@ class Expenses extends Component {
       })
   }
 
+  getTotal = () => {
+    let total = 0;
+    this.props.products.map(p => {
+      total += p.price
+    });
+    return total;
+  }
+
   render() {
     return (
       <div className="main-container">
@@ -106,6 +114,9 @@ class Expenses extends Component {
           </div>
           <Table />
         </div>
+        <div className="total-expenses-container">
+          <p>Total spent: {this.getTotal()} den.</p>
+        </div>
       </div>
     )
   }
@@ -114,6 +125,7 @@ class Expenses extends Component {
 const mapStateToProps = state => {
   return {
     userToken: state.authReducer.userToken,
+    products: state.productReducer.products
   };
 };
 
