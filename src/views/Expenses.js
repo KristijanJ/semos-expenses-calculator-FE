@@ -68,9 +68,7 @@ class Expenses extends Component {
 
   getTotal = () => {
     let total = 0;
-    this.props.products.map(p => {
-      total += p.price
-    });
+    this.props.products.forEach(p => total += p.price);
     return total;
   }
 
